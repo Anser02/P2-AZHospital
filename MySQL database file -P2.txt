@@ -1,0 +1,51 @@
+create database azhospitals;
+show databases;
+use azhospitals;
+create table doctors (D_Code varchar(30) not null primary key,Doctor_name varchar(30)not null,Contact_No varchar(10) not null,
+Specialist varchar(30) not null,duty_time varchar(30),userid varchar(30) not null,pasword varchar(30) not null,Availability varchar(30));
+desc doctors;
+select *from doctors;
+insert into doctors (D_Code,Doctor_name,Contact_No,Specialist,duty_time,userid,pasword,Availability) values 
+('k1','Dr.Amutha','9876543210','Kids Doctor','09:00am to 01:00pm','k1','k101','Yes'),
+('g1','Dr.Rayan','9865478520','General Doctor','10:00am to 02:00pm','g1','g101','no'),
+('d1','Dr.Asrar','9150713542','Dentist','07:00pm to 09:30pm','d1','d101','no'),
+('e1','Dr.Muzammil','9629076420','Eye Doctor','06:00pm to 09:00pm','e1','e101','no'),
+('g2','Dr.Rasheed','9856743255','General Doctor','06:30pm to 10:00pm','g2','g201','Yes'),
+('c1','Dr.Musthaque','9877856921','Cardiologist','11:00am to 02:00pm','c1','c101','Yes'),
+('k2','Dr.Sathish','9629856970','Kids Doctor','07:00pm to 09:30pm','06','k201','no'),
+('s1','Dr.Sankar','8870769366','Skin Doctor','06:00pm to 09:30pm','s1','s101','Yes');
+select *from doctors;
+
+create table patients (Token_no int auto_increment null primary key,Patient_Name varchar(30)not null,Contact_No varchar(10),
+Age int not null,Gender enum ('m','f') not null,
+D_Code varchar(30)not null);
+
+select *from patients;
+insert into patients (Patient_Name,Contact_No,Age,Gender,D_Code) values ('muzammil','9043435678',22,'m','s1'),('asrar','9043435655',25,'m','g2'),
+('sameed','8015435678',18,'m','d1'),('shuhaib','8070435678',19,'m','d1'),('ahmed','9043435569',21,'m','e1'),('Sharib','7708569870',2,'m','k2'),
+('muzammil','9043435678',22,'m','s1');
+select *from patients;
+
+create table medicall(M_Code varchar(30) not null primary key,Medicine_Type varchar (30) not null,Medicine_Name varchar (30) not null,
+Medicine_Price int not null,Total_Stock int not null,Qty int not null, Total_Amount int generated always as (Medicine_Price*Qty),
+Balance_Medicine_Stock int generated always as (Total_Stock-Qty));
+select *from medicall;
+
+insert into medicall (M_Code,Medicine_Type,Medicine_Name,Medicine_Price,Total_Stock) values 
+('t101','tablet','Metformin','85','500'),('t102','tablet','Albuterol','115','700'),('t103','tablet','Omeprazole','100','800'),
+('s101','syrup','Cold Syrup','170','900'),('s102','syrup','cough syrup','195','700'),('s103','syrup','vitamin','215','900'),
+('d101','drop','Eye drop','85','500'),('d102','drop','ear drop','55','500'),('d103','drop','nosil drop','75','400');
+select *from medicall;
+
+create table Medical_Login (userid varchar (30) not null primary key,password varchar(30) not null);
+insert into Medical_Login values ('m101','anser101'),('m102','basha102');  
+select *from Medical_Login; 
+
+create table Reception_Login (userid varchar(30) not null primary key,password varchar(30) not null);
+insert into Reception_Login values ('r101','anser101');  
+insert into Reception_Login values ('r102','basha102');  
+select *from Reception_Login;
+
+create table admin_login (userid varchar(30) not null primary key,password varchar(30) not null);
+insert into admin_login values ('admin01','anser01'), ('admin02','basha02');
+select *from admin_login;
